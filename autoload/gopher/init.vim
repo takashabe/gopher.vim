@@ -17,9 +17,6 @@ fun! gopher#init#version() abort
   let l:v = system('go version')
   if v:shell_error > 0 || !gopher#init#version_check(l:v)
     let l:msg = "Go doesn't seem installed correctly? 'go version' failed with:\n" . l:v
-  " Ensure sure people have Go 1.11.
-  elseif str2nr(l:v[15:], 10) < 11
-    let l:msg = 'gopher.vim needs Go 1.11 or newer; reported version was:\n' . l:v
   endif
 
   if l:msg isnot# ''
