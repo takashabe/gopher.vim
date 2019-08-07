@@ -33,7 +33,6 @@ Linting
 
     :GoFmt                        = (equalprg is set to gofmt)
     :GoImports                    :set equalprg=goimports (see :help ft-go)
-    :GoIfErr                      :set equalprg=goiferr
     :GoFmtAutoSaveToggle          autocmd or plugin like ALE
     :GoAsmFmtAutoSaveToggle       ⤶
 
@@ -103,6 +102,10 @@ Code modification
     :GoImport                     :GoImport foo
     :GoImportAs                   :GoImport foo:alias
     :GoDrop                       :GoImport -rm foo
+
+Code modification
+-----------------
+    :GoIfErr                      Mapped to ;e and ;i
 
 Other
 -----
