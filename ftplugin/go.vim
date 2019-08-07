@@ -56,10 +56,14 @@ onoremap <buffer> <silent> [[ :<C-u>call gopher#motion#jump('o', 'prev')<CR>
 xnoremap <buffer> <silent> [[ :<C-u>call gopher#motion#jump('v', 'prev')<CR>
 
 " Mappings
-nnoremap <buffer> <Plug>(gopher-if) :call gopher#frob#if()<CR>
+nnoremap <buffer> <Plug>(gopher-if)     :call gopher#frob#if()<CR>
+nnoremap <buffer> <Plug>(gopher-err)    :call gopher#frob#ret(1)<CR>
+nnoremap <buffer> <Plug>(gopher-return) :call gopher#frob#ret(0)<CR>
 
 if !get(g:, 'gopher_map_disabled', 0)
-  exe printf('nmap %si <Plug>(gopher-if)', get(g:, 'gopher_map_prefix', ';'))
+  exe printf('nmap %si <Plug>(gopher-if)',     get(g:, 'gopher_map_prefix', ';'))
+  exe printf('nmap %se <Plug>(gopher-err)',    get(g:, 'gopher_map_prefix', ';'))
+  exe printf('nmap %sr <Plug>(gopher-return)', get(g:, 'gopher_map_prefix', ';'))
 endif
 
 " Commands

@@ -42,3 +42,35 @@ fun! gopher#frob#if()
     call append(line('.') - 1, printf('%s%s', l:indent, l:prev_line))
   endif
 endfun
+
+" Generate a return statement with zero values.
+"
+" If error is 1 it will return 'err' and surrounded in an 'if err != nil' check.
+function! gopher#frob#ret(error)
+  let [l:out, l:err] = gopher#system#run(
+        \ [(a:error ? 'iferr' : 'goreturn'), '-pos=' . gopher#buf#cursor()],
+        \ gopher#buf#lines())
+  if l:err
+    return gopher#error(l:out)
+  endif
+
+  " Remove current line if blank, e.g. when the cursor is below 'err := ... '.
+  if getline('.') =~ '^\s*$'
+    silent delete _
+    silent normal! k
+  endif
+
+  " Copy indent.
+  let l:indent = matchstr(getline('.'), '^\s*')
+  if l:indent is# ''
+    let l:indent = matchstr(getline(line('.') - 1), '^\s*')
+  endif
+
+  call append('.', map(split(l:out, "\n"), {_, l -> l:indent . l:l}))
+
+  normal! j^
+  if a:error
+    " Position cursor on 'err'.
+    normal! j$b
+  endif
+endfunction

@@ -78,6 +78,15 @@ The actual mappings:
 <
                         This works in both directions.
 
+                                                 *(gopher-return)* *gopher-;r*
+;r                      Generate a return statement with the appropiate zero
+                        values for the current function.
+
+                                                    *(gopher-err)* *gopher-;e*
+;e                      Generate a return statement with the appropiate zero
+                        values for the current function, wrapped in an 'err !=
+                        nil' check.
+
 ==============================================================================
 FILETYPES                                                   *gopher-filetypes*
 
