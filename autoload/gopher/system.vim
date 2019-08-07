@@ -131,7 +131,7 @@ fun! gopher#system#run(cmd, ...) abort
     return gopher#error('gopher#system#run: can only pass one optional argument')
   endif
 
-  let l:cmd = gopher#system#join(a:cmd)
+  let l:cmd = gopher#system#join(gopher#system#sanitize_cmd(a:cmd))
 
   try
     let l:shell = &shell
@@ -187,7 +187,7 @@ fun! gopher#system#job(done, cmd) abort
         \ 'closed': 0,
         \ 'exit':   -1,
         \ 'start':  reltime(),
-        \ 'cmd':    a:cmd,
+        \ 'cmd':    gopher#system#sanitize_cmd(a:cmd),
         \ 'done':   a:done}
 
   if has('nvim')
@@ -346,6 +346,15 @@ fun! gopher#system#join(l, ...) abort
   finally
     let &shellslash = l:save
   endtry
+endfun
+
+" Remove v:none from the command, makes it easier to build commands:
+"
+"   gopher#system#run(['gosodoff', (a:error ? '-errcheck' : v:none)])
+"
+" Without the filter an empty string would be passed.
+fun! gopher#system#sanitize_cmd(cmd) abort
+  return filter(a:cmd, {_, i -> l:i isnot v:none})
 endfun
 
 fun! s:j_exit_cb(job, exit, ...) abort dict

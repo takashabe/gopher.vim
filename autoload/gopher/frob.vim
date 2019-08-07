@@ -48,7 +48,7 @@ endfun
 " If error is 1 it will return 'err' and surrounded in an 'if err != nil' check.
 function! gopher#frob#ret(error)
   let [l:out, l:err] = gopher#system#run(
-        \ [(a:error ? 'iferr' : 'goreturn'), '-pos=' . gopher#buf#cursor()],
+        \ ['gosodoff', '-pos=' . gopher#buf#cursor(), (a:error ? '-errcheck' : v:none)],
         \ gopher#buf#lines())
   if l:err
     return gopher#error(l:out)

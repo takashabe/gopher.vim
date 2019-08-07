@@ -2,7 +2,7 @@ module tools
 
 require (
 	arp242.net/goimport v0.0.0-20190222045455-cc7494e264a0
-	github.com/110y/goreturn v0.0.0-20190714043431-ce3e67cfeace
+	arp242.net/gosodoff v0.0.0-20190807024354-d9c66c697f0d
 	github.com/fatih/gomodifytags v1.0.0
 	github.com/fatih/motion v0.0.0-20190527122956-41470362fad4
 	github.com/koron/iferr v0.0.0-20180615142939-bb332a3b1d91
